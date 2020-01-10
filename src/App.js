@@ -1,23 +1,62 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import ThemeContext from './theme-context'
+import ThemeBar from './component/ThemeBar'
 import './App.css';
-import NameCard from './component/NameCard';
-import LikesButton from './component/LikesButton';
-import DigitalClock from './component/DigitalClock';
 
-const tags = ['javascript开发者', 'vue开发者', 'react开发者']
+const themes = {
+  light: {
+    classnames: 'btn btn-primary',
+    bgColor: '#eeeeee',
+    color: '#000'
+  },
+  dark: {
+    classnames: 'btn btn-light',
+    bgColor: '#222222',
+    color: '#fff'
+  },
+}
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: 'light'
+    }
+    this.changeTheme = this.changeTheme.bind(this)
+  }
+
+  changeTheme(theme) {
+    this.setState({
+      theme,
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <NameCard name="孤岛拾荒" number="1234567890" isMan tags={tags} />
-          <LikesButton />
-        </header>
-        <DigitalClock />
-      </div>
+      <ThemeContext.Provider value={themes[this.state.theme]}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1>Welcome to React</h1>
+            <a
+              href="#theme-switcher" 
+              className="btn btn-light"
+              onClick={() => {this.changeTheme('light')}}
+            >
+              浅色主题
+            </a>
+            <a 
+              href="#theme-switcher" 
+              className="btn btn-secondary"
+              onClick={() => {this.changeTheme('dark')}}
+            >
+              深色主题
+            </a>
+          </header>
+          <ThemeBar />
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
