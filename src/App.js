@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NameCard from './component/NameCard';
+import LikesButton from './component/LikesButton';
+import DigitalClock from './component/DigitalClock';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const tags = ['javascript开发者', 'vue开发者', 'react开发者']
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <NameCard name="孤岛拾荒" number="1234567890" isMan tags={tags} />
+          <LikesButton />
+        </header>
+        <DigitalClock />
+      </div>
+    );
+  }
 }
 
 export default App;
